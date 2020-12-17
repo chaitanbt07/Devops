@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <servers>
+    <server>
+      <username>admin</username>
+      <password>Chaitan_bt07</password> <!-- Artifactory password -->
+      <id>release</id>
+    </server>
+    <server>
+      <username>admin</username>
+      <password>Chaitan_bt07</password>  <!-- Artifactory password -->
+      <id>snapshot</id>
+    </server>
+  </servers>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <snapshot>
+            <enabled>false</enabled>
+          </snapshot>
+          <id>release</id>
+          <name>libs-release</name>
+          <url>http://10.7.158.30:8081/artifactory/libs-release-local</url>
+        </repository>
+        <repository>
+          <snapshot />
+          <id>snapshot</id>
+          <name>libs-snapshot</name>
+          <url>http://10.7.158.30:8081/artifactory/libs-snapshot-local</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshot>
+            <enabled>false</enabled>
+          </snapshot>
+          <id>release</id>
+          <name>libs-release</name>
+          <url>http://10.7.158.30:8081/artifactory/libs-release-local</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshot />
+          <id>snapshot</id>
+          <name>libs-snapshot</name>
+          <url>http://10.7.158.30:8081/artifactory/libs-snapshot-local</url>
+        </pluginRepository>
+      </pluginRepositories>
+          <!--added below distributionManagement tag to fix maven return code is 409 reasonphrase conflict-->
+     <distributionManagement>
+        <snapshotRepository>
+         <id>snapshot</id>
+         <name>libs-snapshot</name>
+         <url>http://10.7.158.30:8081/artifactory/libs-snapshot-local</url>
+       </snapshotRepository>
+       <releaseRepository>
+         <id>release</id>
+         <name>libs-release</name>
+         <url>http://10.7.158.30:8081/artifactory/libs-release-local</url>
+       </releaseRepository>
+     </distributionManagement>
+      <id>artifactory</id>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+</settings>

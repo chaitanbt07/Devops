@@ -1,0 +1,67 @@
+*---------- Download, Install & Configure Jfrog ---------*
+
+# sudo su - or dzdo su -
+
+ # cd /opt
+
+# wget https://jfrog.s3.amazonaws.com/jfrog-artifactory-oss-6.5.0.zip
+
+# unzip jfrog-artifactory-oss-6.5.0.zip
+
+# mv artifactory-oss-6.5.0 artifactory
+
+# cd /opt/artifactory/bin
+
+# ./artifactory.sh
+
+Duplicate session 
+
+sudo su -
+
+Last login: Tue Oct  6 00:06:05 2020 from 10.42.11.93
+$ sudo su -
+Last login: Tue Oct  6 01:49:34 CDT 2020 on pts/0
+[root@vlmazjuly145 ~]# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.7.158.30  netmask 255.255.252.0  broadcast 10.7.159.255
+        inet6 fe80::20d:3aff:fe05:bde2  prefixlen 64  scopeid 0x20<link>
+        ether 00:0d:3a:05:bd:e2  txqueuelen 1000  (Ethernet)
+        RX packets 446812  bytes 461365216 (439.9 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 233582  bytes 95405319 (90.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 95  bytes 41091 (40.1 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 95  bytes 41091 (40.1 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@vlmazjuly145 ~]# hostname -i
+fe80::20d:3aff:fe05:bde2%eth0 10.7.158.30
+[root@vlmazjuly145 ~]#
+
+
+
+http://10.7.158.30:8081/artifactory/webapp/#/home
+
+
+admin -userid
+passwd-Chaitan_bt07
+
+Skip proxy
+
+create repository-maven
+
+finish
+
+you will see below
+
+ libs-release
+ libs-snapshot
+ libs-release-local
+ libs-snapshot-local
+ jcenter

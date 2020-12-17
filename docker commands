@@ -1,0 +1,152 @@
+sudo yum remove docker docker-common docker-selinux docker-engine-selinux docker-engine docker-ce
+
+
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+      sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+     sudo yum install docker-ce
+
+    sudo systemctl status  docker.service
+
+    sudo systemctl restart docker.service
+
+    sudo systemctl status  docker.service
+	
+	
+
+	
+	
+	
+	
+wget https://download.docker.com/linux/static/stable/x86_64/docker-17.03.0-ce.tgz
+tar -xvf docker-17.03.0-ce.tgz
+sudo cp docker/* /usr/bin/
+sudo dockerd &
+docker search jenkins
+
+
+vi /etc/yum.repos.d/docker-ce.repo
+
+to look like this in the first repo.
+
+[docker-ce-stable]
+name=Docker CE Stable - $basearch
+baseurl=https://download.docker.com/linux/centos/8/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+
+
+docker pull mandar2193/tomcat-smart1
+
+docker images
+
+docker run -it --name tomcatname mandar2193/tomcat-smart1
+
+docker run -d --name tomcatname1 mandar2193/tomcat-smart1
+
+ docker ps -a
+ 
+docker logs 6519ffd528bb
+
+docker stop 6519ffd528bb
+
+docker start 6519ffd528bb
+
+docker restart 6519ffd528bb
+
+
+docker run -d -p 9090:8080 --name tomcatname1 mandar2193/tomcat-smart1
+
+
+[root@vlmazjuly145 ~]# docker ps -a
+CONTAINER ID  IMAGE                                      COMMAND          CREATED         STATUS             PORTS                   NAMES
+3d009cfd1798  docker.io/mandar2193/tomcat-smart1:latest  catalina.sh run  20 minutes ago  Up 20 minutes ago  0.0.0.0:9091->8080/tcp  tomcat1
+07b7f8744513  docker.io/mandar2193/tomcat-smart1:latest  catalina.sh run  27 minutes ago  Created            0.0.0.0:9090->8080/tcp  tomcatname1
+15186e38482b  docker.io/mandar2193/tomcat-smart1:latest  catalina.sh run  41 minutes ago  Up 31 minutes ago                          tomcatname
+[root@vlmazjuly145 ~]# docker exec -it 3d009cfd1798 /bin/bash
+
+root@3d009cfd1798:/usr/local/tomcat# exit
+exit
+
+[root@vlmazjuly145 ~]# docker exec -it 3d009cfd1798 date
+Fri Oct  9 05:43:07 UTC 2020
+[root@vlmazjuly145 ~]# docker exec -it 3d009cfd1798 pwd
+/usr/local/tomcat
+[root@vlmazjuly145 ~]#
+
+
+duplicate container
+
+docker commit 3d009cfd1798 tomcatcusom  --- id is containerid/ containername
+
+--docker exec -it 976fbef9f5e5 /bin/bash
+
+--docker commit 976fbef9f5e5 tomcatcusom   to create a new images using current container 
+
+ docker images
+
+docker run -d -p 9099:8080 tomcatcusom
+
+docker ps -a
+
+ clear
+
+ docker exec -it 829b2fe15c98 /bin/bash
+ docker ps -a
+ 
+ 
+ 
+vi Dockerfile
+
+FROM centos
+
+MAINTAINER Chaitanya
+
+RUN mkdir /opt/tomcat/
+
+WORKDIR /opt
+
+RUN yum -y install unzip
+
+RUN yum -y install java
+
+RUN java -version
+
+RUN yum -y install wget
+
+RUN wget  https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.59/bin/apache-tomcat-8.5.59.zip
+
+RUN dnf clean all && rm -rf /var/cache/dnf  && dnf upgrade -y && dnf update -y & echo hostname
+
+RUN unzip apache-tomcat-8.5.59.zip
+
+RUN mv apache-tomcat-8.5.59/* tomcat
+
+RUN chmod 777 -R tomcat 
+
+ADD xyz-1.0.2-XYZBANK.war /opt/tomcat/webapps/
+
+EXPOSE 8085
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+
+
+==========================================================
+
+FROM centos
+
+MAINTAINER Chaitanya
+
+RUN mkdir /opt/tomcat/
+
+COPY  tomcat/ /opt/tomcat
+
+EXPOSE 8085
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+~
+~

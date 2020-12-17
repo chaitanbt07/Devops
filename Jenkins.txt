@@ -1,0 +1,88 @@
+cd /opt
+
+run to download jenkins war file 
+
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+enable jenkins application
+
+java -jar jenkins.war --httpPort=8082
+
+cat the below for password
+
+#/root/.jenkins/secrets/initialAdminPassword
+
+
+
+========================================
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum install jenkins
+ 
+systemctl daemon-reload
+sudo systemctl restart jenkins
+ 
+
+
+================
+Git SCM plugin
+
+ Maven plugin
+
+ Deploy to container
+Artifactory
+=========================Pipeline script==============
+
+node{​​​​​​
+
+
+     stage('SCM Checkout'){​​​​​​
+
+         git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/kiranreddy97/training.git',branch: 'main'
+
+
+     stage(" Maven Clean Package"){​​​​​​
+
+       def mavenHome =  tool name: "maven", type: "maven"
+
+       def mavenCMD = "${​​​​​​mavenHome}​​​​​​/bin/mvn"
+
+       sh "${​​​​​​mavenCMD}​​​​​​ clean package"
+
+
+     }​​​​​​ 
+
+
+
+     stage('Build Docker Image'){​​​​​​
+
+         sh 'docker build -t srikiranreddy/mavenapp .'
+
+     }​​​​​​
+
+
+     stage('Push Docker Image'){​​​​​​
+
+
+       withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerpassword')]) {​​​​​​
+
+           sh "docker login -u srikiranreddy -p $dockerpassword"
+
+         }​​​​​​
+
+         sh 'docker push srikiranreddy/mavenapp'
+ 
+ }​​​​​​
+
+  stage('run docker images as container '){​​​​​​
+
+      sh 'docker run -d -p 9091:8080 --name tomcatjenkins srikiranreddy/mavenapp '
+
+  }​​​​​​
+
+ }​​​​​​
+
+ }​​​​​​
+ 
+ ===================================================

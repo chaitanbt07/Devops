@@ -1,0 +1,84 @@
+# A basic apache server. To use either add or bind mount content under /var/www
+FROM ubuntu:12.04
+
+MAINTAINER Kimbro Staken version: 0.1
+
+RUN apt-get update && apt-get install -y apache2 && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+
+EXPOSE 80
+
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+
+
+
+===
+
+cat Dockerfile_nginx
+
+ FROM nginx:alpine
+
+ COPY index.html /usr/share/nginx/html
+ 
+ 
+ [root@vlmazjuly114 kiran]#
+ 
+ docker build -t nginx -f Dockerfile_nginx .
+ 
+ 
+ docker save -o nginx.tar nginx
+ 
+ 
+ docker rmi -f localhost/nginx
+ 
+ docker load -i nginx.tar 
+ 
+ 
+ 
+ ============================Docker Compose======================
+ 
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+
+docker-compose -version
+ 
+touch docker-compose.yaml
+version: '3'
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+    db_data:
+	
+:wq
+
+sudo dockerd &
+
+docker compose up -d
+

@@ -1,0 +1,49 @@
+#-----Download,Install,Configure Maven 3.5.4 on CENTOS/RHEL/AMAZON/Ubuntu LINUX--------------------#
+ 
+login to your VM
+
+# sudo su -
+ 
+# mkdir opt
+ 
+# cd opt
+ 
+STEP-1 : Go to /opt directory & Download Apache Maven 
+
+ # cd /opt
+# yum install wget
+# wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip
+ 
+STEP-2 : Unzip 
+ 
+# unzip apache-maven-3.5.4-bin.zip
+ 
+STEP-3 : Rename 
+ 
+# mv apache-maven-3.5.4 maven
+ 
+STEP-4 : Setup Maven Home Path & Configure for all users
+ 
+cat /etc/profile & /etc/bashrc
+ 
+:se nu  #set the line number
+ 
+Wsc & i for insert
+ 
+# vi /etc/profile
+ 
+#Maven Home Path
+
+ export MAVEN_HOME=/opt/maven/
+
+ export M2_HOME=$MAVEN_HOME/bin
+
+ export PATH=$PATH:$MAVEN_HOME/bin
+ 
+STEP-5 : compile it.
+ 
+source /etc/profile
+ 
+STEP-6 : Check the Apache Maven Version
+ 
+# mvn -version

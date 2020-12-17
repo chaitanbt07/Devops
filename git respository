@@ -1,0 +1,76 @@
+[root@vlmazjuly145 ~]# git config --global user.name "Chaitanya.Chennam"
+[root@vlmazjuly145 ~]# yum install git -y
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS - Extended Update Support from RHUI (RPMs)                                               5.5 kB/s | 2.4 kB     00:00
+Red Hat Enterprise Linux 8 for x86_64 - AppStream - Extended Update Support from RHUI (RPMs)                                             28 kB/s | 2.8 kB     00:00
+Microsoft Azure RPMs for RHEL8 Extended Update Support                                                                                   37 kB/s | 2.1 kB     00:00
+Dependencies resolved.
+========================================================================================================================================================================
+ Package                          Architecture               Version                                Repository                                                     Size
+
+[root@vlmazjuly145 ~]# git config --global user.email "chaitanbt07@gmail.com"
+[root@vlmazjuly145 ~]# ssh-keygen -t rsa -b 4096 -C "chaitanbt07@gmail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:XbMmlsTu17ccDqVQyEsFhyQ41W/2Kn7WJDZu9li0+zA chaitanbt07@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|        oooooo   |
+|       o .oo+    |
+|        . o++.   |
+|         +.oo*   |
+|        S *o= .o |
+|         o o.=+o.|
+|          . +oE+.|
+|           o B*=+|
+|          ..*..*o|
++----[SHA256]-----+
+[root@vlmazjuly145 ~]# ls -ltra
+total 28
+-rw-r--r--.  1 root root 129 Aug 12  2018 .tcshrc
+-rw-r--r--.  1 root root 100 Aug 12  2018 .cshrc
+-rw-r--r--.  1 root root 176 Aug 12  2018 .bashrc
+-rw-r--r--.  1 root root 176 Aug 12  2018 .bash_profile
+-rw-r--r--.  1 root root  18 Aug 12  2018 .bash_logout
+drw-------.  2 root root  21 Sep 23 03:28 .fexgt
+dr-xr-xr-x. 18 root root 271 Oct  4 23:46 ..
+drwx------   3 root root  20 Oct  4 23:52 .config
+-rw-------   1 root root 856 Oct  6 00:57 .bash_history
+-rw-r--r--   1 root root  64 Oct  6 01:51 .gitconfig
+dr-xr-x---.  5 root root 171 Oct  6 01:51 .
+drwx------.  2 root root  61 Oct  6 01:52 .ssh
+[root@vlmazjuly145 ~]#  ls -lrt /root/.ssh/id_rsa*
+-rw-r--r-- 1 root root  747 Oct  6 01:52 /root/.ssh/id_rsa.pub
+-rw------- 1 root root 3389 Oct  6 01:52 /root/.ssh/id_rsa
+[root@vlmazjuly145 ~]# cat /root/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDi3YFNFicVCz2Ovbkw3NScKJAQ7ZNI0OwhLyn0rYnxg7JOBLWuCni7v7ZKi88ql/cc29Dy0m2KP6RWqX/FVRt7cAPBRSyQiBX3mAOQpBcNZN7NEOHdcPovHj8DQ0XZmoxURixV1NrPT0OxpCElS9SPRTAxbnX5eGxfWon3U+/5hSNxGgE4BHqI9HZjN4QFduBq1BMg4yc9oPwbQUQMS91qlRdPcUG0YK1E+0WCmWwoLxN4YGD9eDGx8yozXTPiS3ZPS4TCyPPlYfkO6tklzEavyPIrfpKTJvv+x3VD5YI3WUgzHWiOZfE+loa8f56jUmOVV+0GWIn4poEICo5Q1o/DZ5hJ3Yli7kM2/t9ln6BwCyIbVw3OXOAS+8xfD5rBgzmsMX32B7t3UXHVIM6Yfo0in7Z9NdTAxHWYIbe1QCD4k8KVefA62Ad/RQVNk1cAs8blKzq3KQoT/Uvra0j7Ma/9EYpA+/zhcC98L+uU3O/z4lZAaHb/8NIeh3ZunFkuae3rAstTVhACr2eJIm4jxY73xQbBB7Uo5bzTB9iiPGSUjqqJpp/1zRfifCR5TigVoCNzC4mgjm8oVUIFoZqWpeyZWhr6XTzDchf4B7NVDyuCPWJd0DQHVJ9XP4dtCnabkpnUu5eoi5yjMmmUrb+5S9ig7l1OfReEPcuS+AB2Nz03mQ== chaitanbt07@gmail.com
+
+==============================================
+Go to your Github account -> under settings -> SSH and GPG keys -> New SSH key -> paste it here
+
+
+
+initialize the agent.
+
+ # eval "$(ssh-agent -s)" (An agent should generate from Liux machine so that it will keep on communicate to the github account)
+
+ # ssh-add -k ~/.ssh/id_rsa (ssh key pair should be added to the agent)
+
+ # ssh -T -p 443 git@ssh.github.com
+ ==============================================
+ 
+ [root@vlmazjuly145 ~]# eval "$(ssh-agent -s)"
+Agent pid 17509
+[root@vlmazjuly145 ~]# ssh-add -k ~/.ssh/id_rsa
+Identity added: /root/.ssh/id_rsa (chaitanbt07@gmail.com)
+[root@vlmazjuly145 ~]# ssh -T -p 443 git@ssh.github.com
+The authenticity of host '[ssh.github.com]:443 ([140.82.112.35]:443)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[ssh.github.com]:443,[140.82.112.35]:443' (RSA) to the list of known hosts.
+Hi chaitanbt07! You've successfully authenticated, but GitHub does not provide shell access.
+[root@vlmazjuly145 ~]#
